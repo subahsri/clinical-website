@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Medical Report</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      background-color: #f5f9ff;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #002b5b;
+      color: white;
+      padding: 20px;
+      height: 100vh;
+    }
+
+    .sidebar h2 {
+      color: #35b0ff;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      margin: 15px 0;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      color: #35b0ff;
+    }
+
+    .main {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Chan-care</h2>
+  <a href="updateuser.html">Profile Update</a>
+  <a href="#">Book Appointment</a>
+  <a href="history.html">Appointment History</a>
+  <a href="patient_report.html" style="color:#35b0ff;">Upload Report</a>
+</div>
+
+<div class="main">
+  <div class="card">
+    <h2> Upload Patient Medical Report</h2>
+
+    <form action="submit_patient_report.php" method="POST">
+
+      <!-- Age -->
+      <label>Your Age:</label>
+      <input type="number" name="age" required>
+
+      <!-- Email -->
+      <label>Your Gmail:</label>
+      <input type="email" name="gmail" required>
+
+      <!-- Symptoms -->
+      <label>Describe your symptoms:</label>
+      <textarea name="symptoms" required></textarea>
+
+      <!-- Medication -->
+      <label>Previous / Current Medication:</label>
+      <input type="text" name="medication">
+
+      <!-- Hospital -->
+      <label>Previous Treatment Hospital:</label>
+      <input type="text" name="hospital_name" placeholder="Eg: Apollo Hospital, Chennai">
+
+      <!-- Last Checkup -->
+      <label>Last Checkup Date:</label>
+      <input type="date" name="last_checkup">
+
+      <!-- Blood Group -->
+      <label>Blood Group:</label>
+      <select name="blood_group">
+        <option value="">-- Select --</option>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>O+</option>
+        <option>O-</option>
+        <option>AB+</option>
+        <option>AB-</option>
+      </select>
+
+      <!-- Appointment Status -->
+      <label>Have you booked your appointment?</label>
+      <select name="appointment_booked" id="appointment_booked" onchange="toggleAppointmentDate()" required>
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <div id="appointment_date_container" style="display:none;">
+        <label>Appointment Date:</label>
+        <input type="date" name="appointment_date" id="appointment_date">
+      </div>
+
+      <button type="submit">Submit Medical Report</button>
+
+    </form>
+  </div>
+</div>
+
+<script>
+function toggleAppointmentDate() {
+  const select = document.getElementById('appointment_booked');
+  const dateContainer = document.getElementById('appointment_date_container');
+  const dateInput = document.getElementById('appointment_date');
+
+  if (select.value === "yes") {
+    dateContainer.style.display = "block";
+  } else {
+    dateContainer.style.display = "none";
+    dateInput.value = "";
+  }
+}
+</script>
+
+</body>
+</html>
